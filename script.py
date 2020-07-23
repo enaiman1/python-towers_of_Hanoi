@@ -1,74 +1,71 @@
 from stack import Stack
 
 print("\nLet's play Towers of Hanoi!!")
+print("\nRulse of the game")
+print("""1)Only one disk can be moved at a time.
+2)Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack or on an empty rod.
+3)No disk may be placed on top of a smaller disk.
+  """)
 
-#Creating the Stacks
+#Create the Stacks
 stacks = []
 
 left_stack = Stack("Left")
-middle_stack = Stack('Middle')
+middle_stack =Stack("Middle")
 right_stack = Stack("Right")
 
-stacks += [left_stack, middle_stack, right_stack]
-
-
+stacks.extend([left_stack, middle_stack, right_stack])
 #Set up the Game
 num_disks = int(input("\nHow many disks do you want to play with?\n"))
 
 while num_disks < 3:
-  num_disks = int(input("Enter a number greater than or equal to 3\n"))
+  num_disks = int(input("Enter a number greater than or equal to 3 \n"))
 
-# this number will push on to the left_stack
-#this starts at num_disk and goes down by 1 to o
-for disk in range(num_disks, 0, -1):
-  left_stack.push(disk)
-
-# this will let the user the mimium amount of moves in order to win
-num_optimal_move = (2 ** num_disks) -1
-print("\nThe fastest you can solve this game is in {0} moves".format(num_optimal_move))
+for i in range(num_disks, 0, -1):
+  left_stack.push(i)
+  
+num_optimal_moves =(2 ** num_disks) - 1
+print("\n The fastest you can solve this game is in {} moves".format(num_optimal_moves))
 
 #Get User Input
 def get_input():
-  choices = [stack.get_name()[0] for stack in stacks]
-
+  choices = [(stack.get_name()[0]) for stack in stacks]
   while True:
-     for i in range(len(stacks)):
-       name = stacks[i].get_name()
-       letter = choices[i]
-       print("Enter {0} for {1}".format(letter, name))
-    #once options display use will be prompted to pick a choice 
-     user_input = input("")
-
-     # this will check which stack the user chose.
-     if user_input in choices:
+    for i in range(len(stacks)):
+      name = stacks[i]. get_name()
+      letter = choices[i]
+      print("Enter {let} for {nam}".format(let=letter, nam=name))
+    
+    user_input = input("")
+    
+    if user_input in choices:
       for i in range(len(stacks)):
-        return stacks[i]
+        if user_input == choices[i]:
+          return stacks[i]
 
 #Play the Game
-
 num_user_moves = 0
 
 while right_stack.get_size() != num_disks:
+  print("\n\n\n...Current Stacks...")
 
-    print("\n\n\n... Current Stacks...")
-    for stack in stacks:
-        stack.print_items()
+  for i in stacks:
+    i.print_items()
 
-    while True:
-
-        print("\nWhich stack do you want to move from?\n")
-        from_stack = get_input()
-        print("\nWhich stack do you want to move to?\n")
-        to_stack = get_input()
-
-        if from_stack.get_size() == 0:
-            print("\n\nInvalid Move. Try Again")
-        elif to_stack.get_size() == 0 or from_stack.peek() < to_stack.peek():
-            disk = from_stack.pop()
-            to_stack.push(disk)
-            num_user_moves += 1
-            break
-        else:
-            print("\n\nInvalid Move. Try Again")
-
-print("\n\nYou completed the game in {0} moves, and the optimal number of moves is {1}".format(num_user_moves, num_optimal_move))
+  while True:
+    print("\nWhich stack do you want to move from?\n")
+    from_stack = get_input()
+    print("\nWhich stack do you want to move to?\n")
+    to_stack = get_input()
+    
+    if from_stack.is_empty():
+      print("\n\nInvalid Move. Try Again")
+    elif (to_stack.is_empty()) or (from_stack.peek() < to_stack.peek()):
+      disk = from_stack.pop()
+      to_stack.push(disk)
+      num_user_moves += 1
+    else:
+      print("\n\nInvalid Move. Try Again")
+    break
+print("\n\nYou completed the game in {use} moves, and the optimal number of moves is {opt}".format(use=num_user_moves, opt=num_optimal_moves))
+      
