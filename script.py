@@ -27,3 +27,20 @@ for disk in range(num_disks, 0, -1):
 # this will let the user the mimium amount of moves in order to win
 num_optimal_move = (2 ** num_disks) -1
 print("\nThe fastest you can solve this game is in {0} moves".format(num_optimal_move))
+
+#Get User Input
+def get_input():
+  choices = [stack.get_name()[0] for stack in stacks]
+
+  while True:
+     for i in range(len(stacks)):
+       name = stacks[i].get_name()
+       letter = choices[i]
+       print("Enter {0} for {1}".format(letter, name))
+    #once options display use will be prompted to pick a choice 
+     user_input = input("")
+
+     # this will check which stack the user chose.
+     if user_input in choices:
+      for i in range(len(stacks)):
+        return stacks[i]
