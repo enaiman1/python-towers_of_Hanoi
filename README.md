@@ -23,4 +23,6 @@ Built following a [Codecademy Tutorial](https://www.codecademy.com/learn/paths/c
 Feel free to clone or fork this repo if you find it useful. 
 To run full app: 
 1) Make sure you have python3 installed locally
-2)```python3 -c 'import script; script.get_input()'```
+2) Clone this repo to your local machine
+3) In the terminal type 
+    ```python3 -c 'import script; script.get_input()'```
